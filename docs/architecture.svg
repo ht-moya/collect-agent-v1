@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+<rect width="1100" height="560" fill="#f8fafc"/>
+<text x="35" y="40" font-family="Microsoft YaHei,Arial" font-size="24" font-weight="700" fill="#17365d">Collect Agent V1 Core Architecture</text>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker></defs>
+<g font-family="Microsoft YaHei,Arial" text-anchor="middle">
+<rect x="30" y="70" width="1040" height="105" rx="12" fill="#eef4fb" stroke="#d7e2ef"/>
+<text x="50" y="92" text-anchor="start" font-size="13" font-weight="700" fill="#64748b">REQUEST / RUNTIME</text>
+<rect x="55" y="110" width="160" height="45" rx="8" fill="#fff" stroke="#b8c7db"/><text x="135" y="138" font-size="14" fill="#334155">User / Web UI</text>
+<rect x="255" y="110" width="170" height="45" rx="8" fill="#fff" stroke="#b8c7db"/><text x="340" y="138" font-size="14" fill="#334155">AgentController</text>
+<rect x="465" y="110" width="200" height="45" rx="8" fill="#17365d"/><text x="565" y="138" font-size="14" font-weight="700" fill="#fff">AgentOrchestrator</text>
+<rect x="705" y="110" width="315" height="45" rx="8" fill="#fff" stroke="#b8c7db"/><text x="862" y="138" font-size="14" fill="#334155">DeepSeek / Rule Planner + Tools</text>
+<line x1="215" y1="132" x2="250" y2="132" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/><line x1="425" y1="132" x2="460" y2="132" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/><line x1="665" y1="132" x2="700" y2="132" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="30" y="205" width="1040" height="120" rx="12" fill="#f0fdf4" stroke="#bbf7d0"/>
+<text x="50" y="228" text-anchor="start" font-size="13" font-weight="700" fill="#15803d">CONTEXT</text>
+<rect x="55" y="245" width="220" height="55" rx="8" fill="#fff" stroke="#86efac"/><text x="165" y="267" font-size="13" font-weight="700" fill="#166534">Recent N Turns</text><text x="165" y="286" font-size="11" fill="#4b5563">after summary boundary</text>
+<rect x="300" y="245" width="220" height="55" rx="8" fill="#fff" stroke="#86efac"/><text x="410" y="267" font-size="13" font-weight="700" fill="#166534">Session State</text><text x="410" y="286" font-size="11" fill="#4b5563">slots / stage / flags</text>
+<rect x="545" y="245" width="220" height="55" rx="8" fill="#fff" stroke="#86efac"/><text x="655" y="267" font-size="13" font-weight="700" fill="#166534">Short-term Memory</text><text x="655" y="286" font-size="11" fill="#4b5563">Caffeine cache</text>
+<rect x="790" y="245" width="230" height="55" rx="8" fill="#fff" stroke="#86efac"/><text x="905" y="267" font-size="13" font-weight="700" fill="#166534">Long-term Memory</text><text x="905" y="286" font-size="11" fill="#4b5563">VECTOR + FULLTEXT + RRF</text>
+<line x1="565" y1="155" x2="565" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="30" y="350" width="1040" height="175" rx="12" fill="#f1f5f9" stroke="#cbd5e1"/>
+<text x="50" y="373" text-anchor="start" font-size="13" font-weight="700" fill="#475569">EVENT / ASYNC MEMORY</text>
+<rect x="55" y="395" width="220" height="60" rx="8" fill="#fff" stroke="#94a3b8"/><text x="165" y="420" font-size="13" font-weight="700" fill="#334155">EventAppendService</text><text x="165" y="439" font-size="11" fill="#64748b">event + outbox transaction</text>
+<rect x="305" y="395" width="220" height="60" rx="8" fill="#fff" stroke="#94a3b8"/><text x="415" y="420" font-size="13" font-weight="700" fill="#334155">MySQL Event Store</text><text x="415" y="439" font-size="11" fill="#64748b">event_layer + outbox_event</text>
+<rect x="555" y="395" width="220" height="60" rx="8" fill="#fff" stroke="#94a3b8"/><text x="665" y="420" font-size="13" font-weight="700" fill="#334155">MemoryWorker</text><text x="665" y="439" font-size="11" fill="#64748b">idempotent projection</text>
+<rect x="805" y="395" width="215" height="60" rx="8" fill="#fff" stroke="#94a3b8"/><text x="912" y="420" font-size="13" font-weight="700" fill="#334155">Derived Memory</text><text x="912" y="439" font-size="11" fill="#64748b">summary / LTM / checkpoint</text>
+<line x1="275" y1="425" x2="300" y2="425" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/><line x1="525" y1="425" x2="550" y2="425" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/><line x1="775" y1="425" x2="800" y2="425" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="55" y="478" width="965" height="32" rx="8" fill="#fff7ed" stroke="#fed7aa"/><text x="538" y="499" font-size="12" fill="#9a3412">Prompt-cache-friendly extension: dynamic variable definitions are returned via Tool result, keeping the system prefix stable.</text>
+</g></svg>

@@ -186,25 +186,9 @@ outbox_event
 
 ### 核心架构
 
-```mermaid
-flowchart TD
-    U[User / Web UI] --> C[AgentController]
-    C --> O[AgentOrchestrator]
-    O --> H[ConversationHistoryService<br/>摘要位点后最近 N 轮]
-    O --> S[AgentSessionStateService<br/>状态视图]
-    O --> M[ShortTermMemoryService<br/>Caffeine 短期记忆]
-    O --> L[LongTermMemoryRecallService<br/>向量 + FULLTEXT + RRF]
-    O --> P[DeepSeek Planner / Rule Planner]
-    P --> T[AgentToolExecutionService]
-    T --> TS[Customer / Repayment / Human Handoff / Dynamic Variable Tools]
-    O --> E[EventAppendService]
-    E --> DB[(MySQL event_layer)]
-    E --> OB[(MySQL outbox_event)]
-    OB --> W[MemoryWorker]
-    W --> STM[Agent Summary / Short-term Projection]
-    W --> LTM[Long-term Memory Extraction]
-    W --> CP[Extraction Checkpoint]
-```
+![核心架构](docs/architecture.png)
+
+架构图源文件：[docs/architecture.svg](docs/architecture.svg)
 
 ### 设计取舍
 
