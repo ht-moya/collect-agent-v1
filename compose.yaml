@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:9.0
+    container_name: collect-agent-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ADMIN_PASSWORD:-change-me-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-collect_agent}
+      MYSQL_USER: ${MYSQL_USERNAME:-collect_agent}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change-me-app}
+      TZ: Asia/Shanghai
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+    volumes:
+      - collect-agent-mysql-data:/var/lib/mysql
+      - ./db/mysql/V1__schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/mysql/V2__long_term_memory.sql:/docker-entrypoint-initdb.d/02-long-term-memory.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ADMIN_PASSWORD:-change-me-root}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  collect-agent-mysql-data:

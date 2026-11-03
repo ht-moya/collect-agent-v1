@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长期记忆人工审核</title>
+    <style>
+        body{margin:0;background:#f5f7fb;color:#1f2937;font-family:"Microsoft YaHei",Arial,sans-serif}
+        main{max-width:1200px;margin:28px auto;padding:0 18px}
+        h1{color:#17365d} .tip{color:#667085}
+        .actions{display:flex;gap:10px;align-items:center;margin:16px 0}
+        button{border:0;border-radius:8px;padding:8px 12px;background:#17365d;color:#fff;cursor:pointer}
+        button.reject{background:#b42318} button.secondary{background:#e8eef7;color:#17365d}
+        input,textarea{padding:8px;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
+        table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #d9e1ec}
+        th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+        th{background:#eef3f9} .content{max-width:520px;white-space:pre-wrap}
+        a{color:#17365d}
+    </style>
+</head>
+<body>
+<main>
+    <h1>长期记忆人工审核</h1>
+    <p class="tip">低置信度候选只进入 pending，不会自动写入 active。</p>
+    <div class="actions">
+        <a href="/">返回聊天</a>
+        <button id="reload" class="secondary">刷新</button>
+        <input id="reviewer" placeholder="审核人" value="admin">
+        <input id="note" placeholder="审核说明">
+    </div>
+    <table>
+        <thead><tr><th>ID</th><th>类型</th><th>内容</th><th>置信度</th><th>创建时间</th><th>操作</th></tr></thead>
+        <tbody id="rows"></tbody>
+    </table>
+</main>
+<script>
+    const rows = document.getElementById('rows');
+    const reviewer = document.getElementById('reviewer');
+    const note = document.getElementById('note');
+
+    async function loadPending() {
+        const response = await fetch('/api/long-term-memory/pending?status=pending');
+        const items = await response.json();
+        rows.innerHTML = items.map(item => `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.memoryType}</td>
+                <td class="content">${escapeHtml(item.content)}</td>
+                <td>${item.confidence}</td>
+                <td>${item.createdAt || ''}</td>
+                <td>
+                    <button onclick="review(${item.id}, 'approve')">通过</button>
+                    <button class="reject" onclick="review(${item.id}, 'reject')">拒绝</button>
+                </td>
+            </tr>`).join('');
+    }
+
+    async function review(id, action) {
+        const response = await fetch(`/api/long-term-memory/pending/${id}/${action}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({reviewer: reviewer.value, note: note.value})
+        });
+        if (!response.ok) {
+            alert('审核失败：' + await response.text());
+            return;
+        }
+        await loadPending();
+    }
+
+    function escapeHtml(value) {
+        return String(value || '').replace(/[&<>"']/g, char => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[char]);
+    }
+
+    document.getElementById('reload').addEventListener('click', loadPending);
+    loadPending();
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+[
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 604
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 727
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 656
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 918
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 660
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 434
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "A",
+    "PromptTokens": 542,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.7084870848708487,
+    "LatencyMs": 741
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 727
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 851
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 851
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 804
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 710
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 922
+  },
+  {
+    "Scenario": "FIXED",
+    "Cycle": 0,
+    "Variant": "B",
+    "PromptTokens": 567,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6772486772486772,
+    "LatencyMs": 744
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 1,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 890
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 1,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 790
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 2,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 544
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 2,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 439
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 3,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 612
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 3,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 929
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 4,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 783
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 4,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 863
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 5,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 843
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 5,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 859
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 6,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 657
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 6,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 677
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 7,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 937
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 7,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 510
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 8,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 763
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 8,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 687
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 9,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 883
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 9,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 546
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 10,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 695
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 10,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 702
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 11,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 915
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 11,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 910
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 12,
+    "Variant": "B",
+    "PromptTokens": 576,
+    "CachedTokens": 0,
+    "CacheHitRate": 0.0,
+    "LatencyMs": 946
+  },
+  {
+    "Scenario": "MUTATED",
+    "Cycle": 12,
+    "Variant": "A",
+    "PromptTokens": 551,
+    "CachedTokens": 384,
+    "CacheHitRate": 0.6969147005444646,
+    "LatencyMs": 883
+  }
+]

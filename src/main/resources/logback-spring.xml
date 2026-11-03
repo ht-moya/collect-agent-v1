@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 当前版本只把大模型 messages 和回复写入独立 JSONL 文件。 -->
+<configuration>
+    <!-- 引入 Spring Boot 默认日志定义。 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- 控制台只输出警告和错误。 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 控制台格式。 -->
+        <encoder>
+            <!-- 包含时间和级别。 -->
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%X{traceId:-}] %logger{36} - %msg%n</pattern>
+            <!-- 使用 UTF-8。 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 大模型交互 JSONL 文件。 -->
+    <appender name="LLM_INTERACTION_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件路径。 -->
+        <file>logs/agent-llm.jsonl</file>
+        <!-- 按天滚动。 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 归档文件格式。 -->
+            <fileNamePattern>logs/archive/agent-llm.%d{yyyy-MM-dd}.jsonl</fileNamePattern>
+            <!-- 保留天数。 -->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <!-- 单行 JSON 输出。 -->
+        <encoder>
+            <!-- 只输出日志消息和换行。 -->
+            <pattern>%msg%n</pattern>
+            <!-- 使用 UTF-8。 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 大模型日志器只写专用文件。 -->
+    <logger name="LLM_INTERACTION" level="INFO" additivity="false">
+        <!-- 大模型交互文件。 -->
+        <appender-ref ref="LLM_INTERACTION_FILE"/>
+    </logger>
+
+    <!-- 根日志输出警告和错误到控制台。 -->
+    <root level="WARN">
+        <!-- 控制台输出。 -->
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

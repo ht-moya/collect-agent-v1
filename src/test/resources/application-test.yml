@@ -1,0 +1,29 @@
+# MySQL 自动化测试配置。
+spring:
+  # 独立测试数据库，避免污染开发数据。
+  datasource:
+    # MySQL 测试库连接。
+    url: ${MYSQL_TEST_URL:jdbc:mysql://127.0.0.1:3306/collect_agent_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    # MySQL 驱动。
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 测试库用户名。
+    username: ${MYSQL_USERNAME:root}
+    # 测试库密码，由 .env.local 或环境变量提供。
+    password: ${MYSQL_PASSWORD:}
+  # JPA 测试配置。
+  jpa:
+    hibernate:
+      # 每个测试上下文创建并销毁表结构。
+      ddl-auto: create-drop
+
+# 测试阶段关闭外部模型调用。
+agent:
+  llm:
+    enabled: false
+  embedding:
+    enabled: false
+  session:
+    auto-close-enabled: false
+  outbox:
+    relay-interval-ms: 100000
+

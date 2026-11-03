@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能催收 Agent V1</title>
+    <style>
+        body { margin: 0; background: #f5f7fb; color: #1f2937; font-family: "Microsoft YaHei", Arial, sans-serif; }
+        main { max-width: 1000px; margin: 34px auto; padding: 0 18px; }
+        h1 { color: #17365d; margin-bottom: 6px; }
+        .sub { color: #667085; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .card { background: #fff; border: 1px solid #d9e1ec; border-radius: 12px; padding: 18px; }
+        label { display: block; margin: 12px 0 6px; color: #667085; font-size: 14px; }
+        input, textarea { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font: inherit; }
+        textarea { min-height: 130px; resize: vertical; }
+        .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+        button { border: 0; border-radius: 8px; padding: 10px 16px; background: #17365d; color: #fff; cursor: pointer; font: inherit; }
+        button.secondary { background: #e8eef7; color: #17365d; }
+        pre { min-height: 430px; max-height: 640px; overflow: auto; white-space: pre-wrap; word-break: break-word; background: #0f172a; color: #e2e8f0; border-radius: 10px; padding: 16px; }
+        a { color: #17365d; }
+        @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<main>
+    <h1>智能催收 Agent V1</h1>
+    <p class="sub">DeepSeek + MySQL + 原始事件层 + 状态/摘要 + Outbox + Memory Worker</p>
+    <p><a href="/variables.html">动态变量管理</a> | <a href="/long-term-memory.html">长期记忆审核</a> | <a href="/debug.html">查看 MySQL 数据表</a></p>
+    <div class="grid">
+        <section class="card">
+            <label>客户编号</label>
+            <input id="customerId" value="C10001" />
+            <label>会话编号</label>
+            <input id="sessionId" placeholder="留空自动生成" />
+            <label>消息</label>
+            <textarea id="message">我欠多少钱？</textarea>
+            <div class="actions">
+                <button id="send">发送</button>
+                <button id="closeSession" class="secondary">结束会话</button>
+                <button id="outbox" class="secondary">刷新即可在数据表查看 Outbox</button>
+            </div>
+        </section>
+        <section class="card">
+            <pre id="output">等待请求……</pre>
+        </section>
+    </div>
+</main>
+<script>
+    /** 响应展示区域。 */
+    const output = document.getElementById("output");
+
+    /** 发送消息。 */
+    async function sendMessage() {
+        const body = {
+            customerId: document.getElementById("customerId").value.trim(),
+            sessionId: document.getElementById("sessionId").value.trim() || null,
+            message: document.getElementById("message").value.trim()
+        };
+        if (!body.customerId || !body.message) {
+            output.textContent = "客户编号和消息不能为空";
+            return;
+        }
+        output.textContent = "请求处理中……";
+        try {
+            const response = await fetch("/api/agent/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json; charset=UTF-8"},
+                body: JSON.stringify(body)
+            });
+            const data = await response.json();
+            if (data.sessionId) document.getElementById("sessionId").value = data.sessionId;
+            output.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            output.textContent = "请求失败：" + error.message;
+        }
+    }
+
+    /** 结束当前会话。 */
+    async function closeCurrentSession() {
+        const sessionId = document.getElementById("sessionId").value.trim();
+        if (!sessionId) {
+            output.textContent = "当前没有可关闭的会话";
+            return;
+        }
+        output.textContent = "正在结束会话……";
+        try {
+            const response = await fetch(`/api/agent/sessions/${encodeURIComponent(sessionId)}/close`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json; charset=UTF-8"},
+                body: JSON.stringify({reason: "USER_CLOSED"})
+            });
+            output.textContent = JSON.stringify(await response.json(), null, 2);
+        } catch (error) {
+            output.textContent = "结束会话失败：" + error.message;
+        }
+    }
+
+    // 绑定发送按钮。
+    document.getElementById("send").addEventListener("click", sendMessage);
+    // 绑定结束会话按钮。
+    document.getElementById("closeSession").addEventListener("click", closeCurrentSession);
+</script>
+</body>
+</html>
+
+
+

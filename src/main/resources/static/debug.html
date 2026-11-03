@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent MySQL 数据表</title>
+    <style>
+        body { margin: 0; background: #f5f7fb; color: #1f2937; font-family: "Microsoft YaHei", Arial, sans-serif; }
+        main { max-width: 1400px; margin: 28px auto; padding: 0 18px; }
+        h1 { color: #17365d; }
+        .controls { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; margin-bottom: 16px; }
+        select, button { padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; }
+        button { background: #17365d; color: #fff; border: 0; cursor: pointer; }
+        .table-wrap { overflow: auto; background: #fff; border: 1px solid #d9e1ec; border-radius: 10px; }
+        table { border-collapse: collapse; width: 100%; font-size: 13px; }
+        th, td { border-bottom: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; white-space: pre-wrap; max-width: 400px; }
+        th { position: sticky; top: 0; background: #eef3f9; }
+        .tip { color: #667085; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Agent MySQL 数据表</h1>
+    <p class="tip">支持快速查看 event_layer、agent_session_state、agent_summary、agent_long_term_memory、agent_memory_pending、outbox_event。完整 SQL 可使用 MySQL Workbench 或命令行。</p>
+    <div class="controls">
+        <select id="tableName"></select>
+        <button id="load">加载</button>
+        <a href="/">返回聊天</a>
+    </div>
+    <div class="table-wrap"><table id="dataTable"><thead></thead><tbody></tbody></table></div>
+</main>
+<script>
+    /** 表名选择框。 */
+    const select = document.getElementById("tableName");
+
+    /** 表头。 */
+    const thead = document.querySelector("#dataTable thead");
+
+    /** 表体。 */
+    const tbody = document.querySelector("#dataTable tbody");
+
+    /** 加载表列表。 */
+    async function loadTables() {
+        const response = await fetch("/api/debug/tables");
+        const tables = await response.json();
+        select.innerHTML = tables.map(name => `<option value="${name}">${name}</option>`).join("");
+        await loadData();
+    }
+
+    /** 加载当前表数据。 */
+    async function loadData() {
+        const response = await fetch(`/api/debug/tables/${encodeURIComponent(select.value)}?limit=100`);
+        const data = await response.json();
+        const rows = data.rows || [];
+        const columns = rows.length ? Object.keys(rows[0]) : [];
+        thead.innerHTML = `<tr>${columns.map(c => `<th>${c}</th>`).join("")}</tr>`;
+        tbody.innerHTML = rows.map(row => `<tr>${columns.map(c => `<td>${row[c] ?? ""}</td>`).join("")}</tr>`).join("");
+    }
+
+    // 绑定加载按钮。
+    document.getElementById("load").addEventListener("click", loadData);
+
+    // 页面加载后初始化。
+    loadTables();
+</script>
+</body>
+</html>
+
+
+
+
+
